@@ -9,6 +9,27 @@
 from random import randint
 
 
+def guess(start, end):
+    bad_guess = True
+
+    while bad_guess:
+        try:
+            user_guess = int(input(f"Pick a number from {start} to {end}: "))
+
+        except ValueError:
+            print("We need to enter number digits only, no letters!")
+            continue
+
+        else:
+            if user_guess < start or user_guess > end:
+                print(f"Numbers need to be between {start} and {end}")
+                continue
+
+        bad_guess = False
+
+    return user_guess
+
+
 def guessing_game(start, end): 
     print("Welcome to the guessing game!")
     winning_number = randint(start, end)
@@ -16,7 +37,9 @@ def guessing_game(start, end):
     guesses = 5
 
     while guesses > 0:
-        user_guess = int(input(f"Pick a number from {start} to {end}: "))
+        # commenting out the original input call for our helper function instead
+        # user_guess = int(input(f"Pick a number from {start} to {end}: "))
+        user_guess = guess(start, end)
         guesses -= 1
 
         if user_guess == winning_number:
@@ -27,7 +50,7 @@ def guessing_game(start, end):
             print(F"You guessed too high! Try again, you have {guesses} left")
 
         else:
-            print(f"You guessed too low!  Try again, you have {guesses} left ") 
+            print(f"You guessed too low!  Try again, you have {guesses} left") 
         
     print(f"You are out of guesses. Sorry you lose.  The winning number was {winning_number}")
 
