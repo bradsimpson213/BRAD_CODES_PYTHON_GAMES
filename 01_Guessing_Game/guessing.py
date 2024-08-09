@@ -16,7 +16,7 @@ def guessing_game(start, end):
     guesses = 5
 
     while guesses > 0:
-        user_guess = int(input(f"Pick a numberr from {start} to {end}: "))
+        user_guess = int(input(f"Pick a number from {start} to {end}: "))
         guesses -= 1
 
         if user_guess == winning_number:
