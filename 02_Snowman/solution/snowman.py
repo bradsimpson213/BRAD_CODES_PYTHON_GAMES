@@ -11,6 +11,16 @@ def get_game_word():
         return choice(words)
 
 
+def printer(snowman, chances, display, guesses, error=None):
+    """custom print function for the game"""
+    if error:
+        print(error)
+    print(snowman[chances])
+    print(" ".join((display)))    
+    if guesses:
+        print(f"You have guessed: {[guess.upper() for guess in guesses]}")
+
+
 def handle_guess(guesses, chances, display):
     """handle user input and validating it"""
     bad_guess = True
@@ -20,24 +30,27 @@ def handle_guess(guesses, chances, display):
         os.system("clear")
 
         if len(guess) != 1:
-            print(f"We can only guess a single letter, not {guess},try again, no penalty")
-            print(snowman[chances])
-            print(" ".join((display)))
-            print(f"You have guessed: {guesses}")
+            error = f"We can only guess a single letter, not {guess},try again, no penalty"
+            # print(snowman[chances])
+            # print(" ".join((display)))
+            printer(snowman, chances, display, guesses, error)
+            # print(f"You have guessed: {guesses}")
             continue
 
         if guess not in 'abcdefghijklmnopqrstuvwxyz':
-            print(f"You can only guess letters, not {guess}, try again, no penalty")
-            print(snowman[chances])
-            print(" ".join((display)))
-            print(f"You have guessed: {guesses}")
+            error = f"You can only guess letters, not {guess}, try again, no penalty"
+            # print(snowman[chances])
+            # print(" ".join((display)))
+            printer(snowman, chances, display, guesses, error)
+            # print(f"You have guessed: {guesses}")
             continue
         
         if guess in guesses:
-            print(f"You already guessed {guess}, try again, no penalty")
-            print(snowman[chances])
-            print(" ".join((display)))
-            print(f"You have guessed: {guesses}")
+            error = f"You already guessed {guess}, try again, no penalty"
+            # print(snowman[chances])
+            # print(" ".join((display)))
+            printer(snowman, chances, display, guesses, error)
+            # print(f"You have guessed: {guesses}")
             continue
 
         bad_guess = False
@@ -55,8 +68,9 @@ def play_game():
     display = ["_" for _ in range(len(game_word))]
     chances = 0
     guesses = set() 
-    print(snowman[chances])
-    print(" ".join((display)))
+    # print(snowman[chances])
+    # print(" ".join((display)))
+    printer(snowman, chances, display, guesses)
 
     play = True
     while play:
@@ -77,9 +91,10 @@ def play_game():
                 print(f"You lose! The word was {game_word.upper()}. POOR FROSTY 💧💧💧")
                 return 
 
-        print(snowman[chances])
-        print(" ".join((display)))
-        print(f"You have guessed: {guesses}")
+        # print(snowman[chances])
+        # print(" ".join((display)))
+        printer(snowman, chances, display, guesses)
+        # print(f"You have guessed: {guesses}")
 
         if "_" not in display:
             play = False
