@@ -18,9 +18,19 @@ class TicTacToe:
         self.play_game()
 
 
-    def set_player_type(self):
-        pass   
+    def set_player_type(self, player_num):
+        """Method set up if a player is human or computer"""  
+        while True:
+            user_input = input(f"Is Player {player_num} a Human or Computer? (enter H or C): ").upper() 
+            if user_input == "H":
+                return "Human"
+            elif user_input == "C":
+                return "Computer"
+            else:
+                os.system("cls")
+                print(f"Incorrect input of '{user_input}', try again!")
 
+                
     
     def human_move(self):
         pass
