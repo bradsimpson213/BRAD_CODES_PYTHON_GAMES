@@ -33,7 +33,32 @@ class TicTacToe:
                 
     
     def human_move(self):
-        pass
+        """method to handle human input and save the move to the board"""
+        print(instructions, end="")
+        while True:
+            try:
+                play_loc = (int(input(f"Player {self.player_turn} '{'X' if self.player_turn == 1 else 'O'}' enter a number 1-9 to make your move: ")) - 1)
+
+            except TypeError:
+                print(f"You entered {play_loc}, please enter a number 1-9")
+                continue
+
+            except ValueError:
+                print(f"You entered {play_loc}, please enter a number 1-9")
+                continue
+
+            else:
+                if play_loc not in range(0, 10):
+                    print(f"You entered {play_loc}, please enter a number 1-9") 
+                    continue
+
+                elif self.board[play_loc] != " ":
+                    print(f"{self.board[play_loc]} has already played in the space, try again!")
+                    continue
+
+                else:
+                    self.board[play_loc] = 'X' if self.player_turn == 1 else 'O'
+                    return
 
 
     def computer_move(self):
