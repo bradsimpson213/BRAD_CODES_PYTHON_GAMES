@@ -19,7 +19,7 @@ class TicTacToe:
 
 
     def set_player_type(self, player_num):
-        """Method set up if a player is human or computer"""  
+        """Method to set up if a player is human or computer"""  
         while True:
             user_input = input(f"Is Player {player_num} a Human or Computer? (enter H or C): ").upper() 
             if user_input == "H":
@@ -30,7 +30,6 @@ class TicTacToe:
                 os.system("cls")
                 print(f"Incorrect input of '{user_input}', try again!")
 
-                
     
     def human_move(self):
         """method to handle human input and save the move to the board"""
@@ -69,9 +68,37 @@ class TicTacToe:
         pass
 
 
-
     def check_for_win(self):
-        pass
+        """method to check if there is a win on the game board"""
+
+        # check the rows
+        for val in range(0, 9, 3):
+            if self.board[val] == self.board[val + 1] == self.board[val+2]:
+                if self.board[val] == "X":
+                    return "X"
+                if self.board[val] == "O":
+                    return "O"
+                
+        # check the columns
+        for val in range(3):
+            if self.board[val] == self.board[val + 3] == self.board[val + 6]:
+                if self.board[val] == "X":
+                    return "X"
+                if self.board[val] == "O":
+                    return "O"
+
+        # check diagonals
+        if self.board[0] == self.board[4] == self.board[8] or self.board[2] == self.board[4] == self.board[6]:
+            if self.board[val] == "X":
+                    return "X"
+            if self.board[val] == "O":
+                    return "O"
+            
+        # check for tie
+        if " " not in self.board:
+            return "tie"
+        
+        return None
 
 
     def play_game(self):
