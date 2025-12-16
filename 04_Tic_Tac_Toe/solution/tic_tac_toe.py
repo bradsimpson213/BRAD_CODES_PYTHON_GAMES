@@ -39,11 +39,13 @@ class TicTacToe:
                 play_loc = (int(input(f"Player {self.player_turn} '{'X' if self.player_turn == 1 else 'O'}' enter a number 1-9 to make your move: ")) - 1)
 
             except TypeError:
+                print("TYPEERROR")
                 print(f"You entered {play_loc}, please enter a number 1-9")
                 continue
 
             except ValueError:
-                print(f"You entered {play_loc}, please enter a number 1-9")
+                print("VALUEERROR")
+                print(f"You entered an invalid character, please enter a number 1-9")
                 continue
 
             else:
@@ -70,10 +72,9 @@ class TicTacToe:
 
     def check_for_win(self):
         """method to check if there is a win on the game board"""
-
         # check the rows
         for val in range(0, 9, 3):
-            if self.board[val] == self.board[val + 1] == self.board[val+2]:
+            if self.board[val] == self.board[val + 1] == self.board[val + 2]:
                 if self.board[val] == "X":
                     return "X"
                 if self.board[val] == "O":
@@ -102,8 +103,55 @@ class TicTacToe:
 
 
     def play_game(self):
-        pass
+        """method to control game play of tictactoe"""
+        os.system("cls")
+        print(logo)
+        print('Welcome to Tic Tac Toe!')
+        self.player1 = self.set_player_type(1)
+        print(f"Player1 is a {self.player1} and will play 'X'")
+        self.player2 = self.set_player_type(2)
+        print(f"Player2 is a {self.player2} and will play 'O'")
+        sleep(2)
 
+        while True:
+            print_display(self.board)
 
+            if self.player1 == "Human":
+                self.human_move()
+            else:
+                # not implemented yet
+                self.computer_move()
+
+            print_display(self.board)
+            result = self.check_for_win()
+
+            if result == "X":
+                print("Player1 'X' wins!!!")
+                return
+
+            if result == "tie":
+                print("Game ends in a TIE!!!")
+                return
+            
+            self.player_turn = 2
+
+            if self.player2 == "Human":
+                self.human_move()
+            else:
+                # not implemented yet
+                self.computer_move()
+
+            print_display(self.board)
+            result = self.check_for_win()
+
+            if result == "O":
+                print("Player1 'O' wins!!!")
+                return
+
+            if result == "tie":
+                print("Game ends in a TIE!!!")
+                return
+
+            self.player_turn = 1
 
 TicTacToe()
