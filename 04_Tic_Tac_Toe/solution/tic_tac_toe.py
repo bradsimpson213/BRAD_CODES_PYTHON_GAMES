@@ -71,7 +71,7 @@ class TicTacToe:
                 self.board[index] = 'X' if self.player_turn == 1 else 'O'
                 score = self.minimax(0, False)
                 self.board[index] = ' '
-                if score > best_move:
+                if score > best_score:  # best_score not best_move
                     best_score = score
                     best_move = index
 
