@@ -39,12 +39,10 @@ class TicTacToe:
                 play_loc = (int(input(f"Player {self.player_turn} '{'X' if self.player_turn == 1 else 'O'}' enter a number 1-9 to make your move: ")) - 1)
 
             except TypeError:
-                print("TYPEERROR")
                 print(f"You entered {play_loc}, please enter a number 1-9")
                 continue
 
             except ValueError:
-                print("VALUEERROR")
                 print(f"You entered an invalid character, please enter a number 1-9")
                 continue
 
@@ -63,7 +61,24 @@ class TicTacToe:
 
 
     def computer_move(self):
-        pass
+        """Method to control a computer player, using the minimax method"""
+
+        best_score = float("-inf")
+        best_move = None
+
+        for index, move in enumerate(self.board):
+            if move == " ":
+                self.board[index] = 'X' if self.player_turn == 1 else 'O'
+                score = self.minimax(0, False)
+                self.board[index] = ' '
+                if score > best_move:
+                    best_score = score
+                    best_move = index
+
+        self.board[best_move] = 'X' if self.player_turn == 1 else 'O'
+        print(f'Computer Player {self.player_turn} is making their move...')
+        sleep(2)
+
 
 
     def minimax(self):
@@ -153,5 +168,7 @@ class TicTacToe:
                 return
 
             self.player_turn = 1
+
+
 
 TicTacToe()
